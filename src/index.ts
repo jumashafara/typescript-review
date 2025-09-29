@@ -1,3 +1,5 @@
+import type { FinanceRecord } from './interfaces';
+
 let type = document.querySelector('#type') as HTMLSelectElement;
 let fromTo = document.querySelector('#tofrom') as HTMLInputElement;
 let details = document.querySelector('#details') as HTMLInputElement;
@@ -10,19 +12,24 @@ let itemList = document.querySelector('.item-list') as HTMLUListElement;
 
 addButton.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log(type.value, fromTo.value, details.value, amount.value);
+  let newRecord: FinanceRecord = {
+    type: type.value,
+    fromTo: fromTo.value,
+    details: details.value,
+    amount: amount.value
+  }
 
-  appendListItem(type.value, fromTo.value, details.value, amount.value);
+  appendListItem(newRecord);
 });
 
 
-const appendListItem = (type: string, fromTo: string, details: string, amount: string) => {
+const appendListItem = (newRecord: FinanceRecord) => {
   const listItem = document.createElement('li');
   listItem.innerHTML = `
-    <h4>${type}</h4>
-    <p>${fromTo}</p>
-    <p>${details}</p>
-    <p>${amount}</p>
+    <h4>${newRecord.type}</h4>
+    <p>${newRecord.fromTo}</p>
+    <p>${newRecord.details}</p>
+    <p>${newRecord.amount}</p>
   `;
   itemList.appendChild(listItem);
 };

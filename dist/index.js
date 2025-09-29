@@ -7,16 +7,21 @@ let addButton = document.querySelector('button');
 let itemList = document.querySelector('.item-list');
 addButton.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log(type.value, fromTo.value, details.value, amount.value);
-    appendListItem(type.value, fromTo.value, details.value, amount.value);
+    let newRecord = {
+        type: type.value,
+        fromTo: fromTo.value,
+        details: details.value,
+        amount: amount.value
+    };
+    appendListItem(newRecord);
 });
-const appendListItem = (type, fromTo, details, amount) => {
+const appendListItem = (newRecord) => {
     const listItem = document.createElement('li');
     listItem.innerHTML = `
-    <h4>${type}</h4>
-    <p>${fromTo}</p>
-    <p>${details}</p>
-    <p>${amount}</p>
+    <h4>${newRecord.type}</h4>
+    <p>${newRecord.fromTo}</p>
+    <p>${newRecord.details}</p>
+    <p>${newRecord.amount}</p>
   `;
     itemList.appendChild(listItem);
 };
